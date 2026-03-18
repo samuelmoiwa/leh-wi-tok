@@ -66,6 +66,7 @@ npm install
 
 # 3. Start the development server
 npx expo start
+```
 
 ## 📝 License <a name="license"></a>
 
