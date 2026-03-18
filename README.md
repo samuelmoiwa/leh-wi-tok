@@ -1,56 +1,75 @@
-# Welcome to your Expo app 👋
+# Leh Wi Tok - Sierra Leonean Sign Language Learning App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+[![Expo](https://img.shields.io/badge/Expo-000000?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev)
+[![React Native](https://img.shields.io/badge/React_Native-20232E?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactnative.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 
-## Get started
+**Leh Wi Tok** (Krio for *"Let Us Talk"*) is an educational mobile application developed by the **Directorate of Science, Technology and Innovation (DSTI)** in Sierra Leone.
 
-1. Install dependencies
+The app helps users learn **Sierra Leonean Sign Language (SLSL)**, making communication more accessible for the deaf and hard-of-hearing community.
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## 🎯 Mission
 
-   ```bash
-   npx expo start
-   ```
+- Provide **free, accessible** sign language education
+- Support **offline learning** in areas with limited connectivity
+- Deliver **culturally relevant** content specific to Sierra Leone
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## ✨ Key Features
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+| Feature              | Description |
+|----------------------|-----------|
+| **Lessons**          | Progressive video courses (Beginner → Advanced) with individual "nuggets" (signs) |
+| **Dictionary**       | Searchable offline dictionary with categories and visual aids (stored in SQLite) |
+| **Tok (Translator)** | Text-to-sign translator powered by sign.mt |
+| **Progress Tracking**| Real-time progress, level completion, and cross-device sync |
+| **Onboarding**       | Interactive 3-page walkthrough with user preference collection |
+| **User Profiles**    | Role-based accounts (Student, Teacher, Parent, Volunteer, General User) |
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## 🛠 Tech Stack
+
+| Category           | Technology                          |
+|--------------------|-------------------------------------|
+| Framework          | React Native with Expo (SDK 51+)    |
+| Language           | TypeScript                          |
+| Navigation         | Expo Router (file-based)            |
+| Styling            | React Native StyleSheet + Tailwind (via NativeWind if added) |
+| Video Playback     | `expo-video`                        |
+| Local Database     | `expo-sqlite`                       |
+| Image Handling     | `expo-image`                        |
+| State Management   | React Hooks + AsyncStorage          |
+| Animations         | `react-native-reanimated`           |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js v22.10.0 (or use `.nvmrc`)
+- Expo CLI
+- iOS Simulator / Android Emulator
+
+### Installation
 
 ```bash
-npm run reset-project
-```
+# 1. Clone the repository
+git clone <your-repo-url>
+cd LehWiTok
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+# 2. Install dependencies
+npm install
 
-### Other setup steps
+# 3. Start the development server
+npx expo start
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## 📝 License <a name="license"></a>
 
-## Learn more
+This project is [MIT](./LICENSE) licensed.
 
-To learn more about developing your project with Expo, look at the following resources:
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
