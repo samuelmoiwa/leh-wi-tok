@@ -58,7 +58,7 @@ The app helps users learn **Sierra Leonean Sign Language (SLSL)**, making commun
 
 ```bash
 # 1. Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/samuelmoiwa/leh-wi-tok.git
 cd LehWiTok
 
 # 2. Install dependencies
