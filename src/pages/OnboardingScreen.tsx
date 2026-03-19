@@ -15,14 +15,13 @@ const ONBOARDING_KEY = '@lehwitok/hasCompletedOnboarding';
 
 const OnboardingScreen = () => {
   const markOnboardingComplete = async () => {
-    try {
-      await AsyncStorage.setItem(ONBOARDING_KEY, 'true');
-      router.replace('/home');
-    } catch (error) {
-      console.error('Failed to save onboarding:', error);
-      router.replace('/home');
-    }
-  };
+  try {
+    await AsyncStorage.setItem(ONBOARDING_KEY, 'true');
+    router.replace('/login');           // ← Changed from /home to /login
+  } catch (error) {
+    router.replace('/login');
+  }
+};
 
   // ────────────────────── Custom Buttons ──────────────────────
   const DoneButtonComponent = ({ ...props }) => (
