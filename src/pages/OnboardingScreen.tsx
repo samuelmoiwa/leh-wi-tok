@@ -6,76 +6,70 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native"; // 1. Import StatusBar
+} from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
+import { router } from "expo-router";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const ONBOARDING_KEY = '@lehwitok/hasCompletedOnboarding';
 
 const OnboardingScreen = () => {
-
-  const DoneButtonComponent = ({ ...props }) => {
-    return (
-      <TouchableOpacity {...props} style={{ marginRight: 20 }}>
-        <Text style={{ color: "#FFFFFF" }}>Done</Text>
-      </TouchableOpacity>
-    );
+  const markOnboardingComplete = async () => {
+    try {
+      await AsyncStorage.setItem(ONBOARDING_KEY, 'true');
+      router.replace('/home');
+    } catch (error) {
+      console.error('Failed to save onboarding:', error);
+      router.replace('/home');
+    }
   };
 
-  const NextButtonComponent = ({ ...props }) => {
-    return (
-      <TouchableOpacity {...props} style={{ marginRight: 20 }}>
-        <Text style={{ color: "#FFFFFF" }}>Next</Text>
-      </TouchableOpacity>
-    );
-  };
+  // ────────────────────── Custom Buttons ──────────────────────
+  const DoneButtonComponent = ({ ...props }) => (
+    <TouchableOpacity {...props} style={{ marginRight: 20 }}>
+      <Text style={{ color: "#FFFFFF", fontWeight: '700', fontSize: 18 }}>Done</Text>
+    </TouchableOpacity>
+  );
 
-  const SkipButtonComponent = ({ ...props }) => {
-    return (
-      <TouchableOpacity {...props} style={{ marginLeft: 20 }}>
-        <Text style={{ color: "#FFFFFF" }}>Skip</Text>
-      </TouchableOpacity>
-    );
-  };
+  const NextButtonComponent = ({ ...props }) => (
+    <TouchableOpacity {...props} style={{ marginRight: 20 }}>
+      <Text style={{ color: "#FFFFFF", fontWeight: '700', fontSize: 18 }}>Next</Text>
+    </TouchableOpacity>
+  );
 
-  const DotComponent = ({ selected }: { selected: boolean }) => {
-    return (
-      <View
-        style={{
-          width: selected ? 25 : 10,
-          height: 10,
-          borderRadius: 5,
-          marginHorizontal: 3,
-          backgroundColor: selected ? "#FFFFFF" : "rgba(255, 255, 255, 0.5)",
-        }}
-      />
-    );
-  };
+  const SkipButtonComponent = ({ ...props }) => (
+    <TouchableOpacity {...props} style={{ marginLeft: 20 }}>
+      <Text style={{ color: "#FFFFFF", fontWeight: '700', fontSize: 18 }}>Skip</Text>
+    </TouchableOpacity>
+  );
 
-  const onDone = () => {
-    // Handle what happens after onboarding is done
-    console.log("Onboarding completed!");
-  }
-
-  const onSkip = () => {
-    // Handle what happens when onboarding is skipped
-    console.log("Onboarding skipped!");
-  }
+  const DotComponent = ({ selected }: { selected: boolean }) => (
+    <View
+      style={{
+        width: selected ? 25 : 10,
+        height: 10,
+        borderRadius: 5,
+        marginHorizontal: 3,
+        backgroundColor: selected ? "#FFFFFF" : "rgba(255, 255, 255, 0.5)",
+      }}
+    />
+  );
 
   return (
     <View style={styles.container}>
-      {/* 2. Hide the App/Status Bar */}
-      <StatusBar hidden={true} translucent backgroundColor="transparent" />
+      <StatusBar hidden translucent backgroundColor="transparent" />
 
       <Onboarding
-        // 3. Ensure the container stretches to the very edges
         containerStyles={{ paddingBottom: 100 }}
         DoneButtonComponent={DoneButtonComponent}
         NextButtonComponent={NextButtonComponent}
         SkipButtonComponent={SkipButtonComponent}
         DotComponent={DotComponent}
-        onDone={onDone}
-        onSkip={onSkip}
+        onDone={markOnboardingComplete}
+        onSkip={markOnboardingComplete}
         pages={[
           {
-            backgroundColor: "#AC3470",
+            backgroundColor: "#C0266F",           // Updated to match first illustration (warm pink)
             image: (
               <View style={styles.lottieContainer}>
                 <LottieView
@@ -86,11 +80,11 @@ const OnboardingScreen = () => {
                 />
               </View>
             ),
-            title: "Welcome!",
-            subtitle: "Ready to start your journey?",
+            title: "Leh Wi Tok",
+            subtitle: "Learn Sierra Leonean Sign Language\nand bridge the communication gap",
           },
           {
-            backgroundColor: "#870F7D",
+            backgroundColor: "#6D28D9",           // Updated to match second illustration (rich purple)
             image: (
               <View style={styles.lottieContainer}>
                 <LottieView
@@ -101,11 +95,11 @@ const OnboardingScreen = () => {
                 />
               </View>
             ),
-            title: "Connect",
-            subtitle: "Talk to anyone, anywhere.",
+            title: "Connect Through Signs",
+            subtitle: "Master everyday signs used in Sierra Leone\n— greetings, family, food & more",
           },
           {
-            backgroundColor: "#21988F",
+            backgroundColor: "#0F766E",           // Updated to match rocket illustration (fresh teal)
             image: (
               <View style={styles.lottieContainer}>
                 <LottieView
@@ -116,8 +110,8 @@ const OnboardingScreen = () => {
                 />
               </View>
             ),
-            title: "Launch",
-            subtitle: "Boost your productivity today.",
+            title: "Start Signing Today",
+            subtitle: "Free progressive lessons, offline dictionary\nand progress tracking",
           },
         ]}
       />
@@ -128,9 +122,7 @@ const OnboardingScreen = () => {
 export default OnboardingScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1, // Takes up the entire screen height and width
-  },
+  container: { flex: 1 },
   lottieContainer: {
     width: 300,
     height: 300,
