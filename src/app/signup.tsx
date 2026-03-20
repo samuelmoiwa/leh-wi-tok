@@ -74,6 +74,7 @@ export default function Signup() {
             onChangeText={setName}
             mode="flat"
             activeUnderlineColor="#C0266F"
+            textColor='#303133'
             style={styles.input}
             left={<TextInput.Icon icon="account-outline" color="#6B7280" />}
           />
@@ -84,6 +85,7 @@ export default function Signup() {
             onChangeText={setEmail}
             mode="flat"
             activeUnderlineColor="#C0266F"
+            textColor='#303133'
             keyboardType="email-address"
             style={styles.input}
             left={<TextInput.Icon icon="email-outline" color="#6B7280" />}
@@ -96,6 +98,7 @@ export default function Signup() {
             secureTextEntry
             mode="flat"
             activeUnderlineColor="#C0266F"
+            textColor='#303133'
             style={styles.input}
             left={<TextInput.Icon icon="lock-outline" color="#6B7280" />}
           />
@@ -107,6 +110,7 @@ export default function Signup() {
             secureTextEntry
             mode="flat"
             activeUnderlineColor="#C0266F"
+            textColor='#303133'
             style={styles.input}
             left={<TextInput.Icon icon="lock-check-outline" color="#6B7280" />}
           />
