@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, StyleSheet, TouchableOpacity,
+    KeyboardAvoidingView, Platform, ScrollView, Image
+} from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 import { router, Stack } from 'expo-router';
-import Toast from 'react-native-toast-message'; // 1. Import Toast
+import Toast from 'react-native-toast-message';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -13,7 +15,6 @@ export default function Login() {
   const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleLogin = async () => {
-    // 2. Validation Logic with Toast Popups
     if (!email || !password) {
       Toast.show({
         type: 'error',
@@ -34,7 +35,6 @@ export default function Login() {
 
     setLoading(true);
 
-    // Fake API delay
     setTimeout(() => {
       setLoading(false);
       Toast.show({
@@ -57,10 +57,15 @@ export default function Login() {
         {/* Header Section */}
         <View style={styles.header}>
           <View style={styles.logoCircle}>
-             <Text style={styles.logoText}>SL</Text>
-          </View>
-          <Text style={styles.title}>Welcome Back</Text>
-          <Text style={styles.subtitle}>Sign in to continue your journey</Text>
+             {/* Fixed: Image component with proper styling */}
+             <Image
+                source={require('../../assets/images/logofile.png')}
+                style={styles.logoImage}
+                resizeMode="contain"
+             />
+           </View>
+           <Text style={styles.title}>Leh We Tok</Text>
+           <Text style={styles.subtitle}>Sign in to continue your journey</Text>
         </View>
 
         {/* Login Form Card */}
@@ -71,6 +76,7 @@ export default function Login() {
             onChangeText={setEmail}
             mode="flat"
             activeUnderlineColor="#C0266F"
+            textColor='#303133'
             autoCapitalize="none"
             style={styles.input}
             left={<TextInput.Icon icon="email-outline" color="#6B7280" />}
@@ -83,6 +89,7 @@ export default function Login() {
             secureTextEntry={!showPassword}
             mode="flat"
             activeUnderlineColor="#C0266F"
+            textColor='#303133'
             style={styles.input}
             left={<TextInput.Icon icon="lock-outline" color="#6B7280" />}
             right={
@@ -129,11 +136,19 @@ const styles = StyleSheet.create({
   scrollContent: { flexGrow: 1, justifyContent: 'center', padding: 24 },
   header: { alignItems: 'center', marginBottom: 32 },
   logoCircle: {
-    width: 80, height: 80, borderRadius: 40,
-    backgroundColor: '#FCE7F3', alignItems: 'center', justifyContent: 'center',
+    width: 100, // Slightly larger to fit a real logo
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: '#FCE7F3',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: 20,
+    overflow: 'hidden', // Ensures image stays inside the circle
   },
-  logoText: { fontSize: 28, fontWeight: 'bold', color: '#C0266F' },
+  logoImage: {
+    width: '70%',
+    height: '70%',
+  },
   title: { fontSize: 28, fontWeight: '800', color: '#111827', marginBottom: 8 },
   subtitle: { fontSize: 15, color: '#6B7280', textAlign: 'center' },
   card: { backgroundColor: '#FFFFFF', borderRadius: 20 },
