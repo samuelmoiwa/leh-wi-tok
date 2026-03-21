@@ -68,7 +68,7 @@ const OnboardingScreen = () => {
         onSkip={markOnboardingComplete}
         pages={[
           {
-            backgroundColor: "#C0266F",           // Updated to match first illustration (warm pink)
+            backgroundColor: "#C0266F",
             image: (
               <View style={styles.lottieContainer}>
                 <LottieView
@@ -83,7 +83,7 @@ const OnboardingScreen = () => {
             subtitle: "Learn Sierra Leonean Sign Language\nand bridge the communication gap",
           },
           {
-            backgroundColor: "#6D28D9",           // Updated to match second illustration (rich purple)
+            backgroundColor: "#6D28D9",
             image: (
               <View style={styles.lottieContainer}>
                 <LottieView
@@ -98,7 +98,7 @@ const OnboardingScreen = () => {
             subtitle: "Master everyday signs used in Sierra Leone\n— greetings, family, food & more",
           },
           {
-            backgroundColor: "#0F766E",           // Updated to match rocket illustration (fresh teal)
+            backgroundColor: "#0F766E",
             image: (
               <View style={styles.lottieContainer}>
                 <LottieView
