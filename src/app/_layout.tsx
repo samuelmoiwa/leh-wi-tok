@@ -1,18 +1,37 @@
 import { Stack } from "expo-router";
 import { PaperProvider } from "react-native-paper";
-import Toast from 'react-native-toast-message';
+import Toast from "react-native-toast-message";
+import { ThemeProvider, useAppTheme } from "../context/ThemeContext";
+
+function AppContent() {
+  const { theme, isDarkMode } = useAppTheme();
+
+  return (
+    <PaperProvider theme={theme}>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          headerStyle: { backgroundColor: isDarkMode ? '#121212' : '#FFFFFF' },
+          headerTintColor: "#C0266F",
+          headerTitleStyle: { fontWeight: "700" },
+          headerShadowVisible: false,
+        }}
+      >
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="home" options={{ headerShown: false }} />
+        <Stack.Screen name="settings" options={{ headerShown: true, title: "Settings" }} />
+        <Stack.Screen name="edit-profile" options={{ headerShown: true, title: "Edit Profile" }} />
+      </Stack>
+      {/* Toast is outside the stack to stay on top */}
+      <Toast />
+    </PaperProvider>
+  );
+}
 
 export default function RootLayout() {
   return (
-    <>
-      <PaperProvider>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="login" />
-          <Stack.Screen name="signup" />
-        </Stack>
-      </PaperProvider>
-    <Toast />
-    </>
-
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
