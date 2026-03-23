@@ -21,6 +21,7 @@ function AppContent() {
         <Stack.Screen name="home" options={{ headerShown: false }} />
         <Stack.Screen name="settings" options={{ headerShown: true, title: "Settings" }} />
         <Stack.Screen name="edit-profile" options={{ headerShown: true, title: "Edit Profile" }} />
+        <Stack.Screen name="lessons" options={{ headerShown: true, title: "Lessons", }}/>
       </Stack>
       {/* Toast is outside the stack to stay on top */}
       <Toast />
