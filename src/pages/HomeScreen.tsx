@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, StatusBar } from 'react-native';
-// Fix: Import from context instead of react-native
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text, IconButton } from 'react-native-paper';
 import { useAppTheme } from '../context/ThemeContext';
