@@ -1,12 +1,12 @@
 import { Stack, useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    TouchableOpacity, // Ensure this is here
-    View,
-    Platform
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Platform,
 } from "react-native";
 import { IconButton, Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -33,7 +33,6 @@ const TokScreen = () => {
       return;
     }
 
-    // Mock Database for Animations
     const mockSigns: Record<string, { word: string; animation: any }> = {
       hello: {
         word: "Hello",
@@ -87,7 +86,7 @@ const TokScreen = () => {
       <Stack.Screen options={{ headerShown: false }} />
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
 
-      {/* Custom Top Navigation */}
+      {/* Cleaned Top Navigation */}
       <View style={styles.topNav}>
         <TouchableOpacity
           activeOpacity={0.7}
@@ -102,12 +101,8 @@ const TokScreen = () => {
           />
           <Text style={styles.backText}>Home</Text>
         </TouchableOpacity>
-
-        <Text style={[styles.navTitle, { color: isDarkMode ? "#fff" : "#111827" }]}>
-          Translator
-        </Text>
-
-        <View style={{ width: 60 }} /> {/* Spacer to balance the back button */}
+        <Text style={[styles.navTitle, { color: isDarkMode ? "#fff" : "#111827" }]}>Translator</Text>
+        <View style={styles.rightSpacer} />
       </View>
 
       <ScrollView
@@ -119,9 +114,7 @@ const TokScreen = () => {
           onChangeText={setInputText}
           onTranslate={handleTranslate}
         />
-
         {translatedSign && <SignAnimation sign={translatedSign} />}
-
         <TranslationHistory history={history} />
       </ScrollView>
     </SafeAreaView>
@@ -135,25 +128,32 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 8,
-    height: 50, // Added height for touch stability
+    height: 54,
   },
   backButton: {
     flexDirection: "row",
     alignItems: "center",
-    minWidth: 80
+    width: 80, // Fixed width for symmetry
   },
   backText: {
     color: "#C0266F",
     fontSize: 16,
     fontWeight: "600",
-    marginLeft: -10, // Adjust spacing between icon and text
+    marginLeft: -10,
   },
   navTitle: {
     fontSize: 18,
     fontWeight: "800",
-    textAlign: 'center'
+    textAlign: "center",
+    flex: 1, // Let title take middle space
   },
-  scrollBody: { padding: 20 },
+  rightSpacer: {
+    width: 80, // Matches backButton width for perfect centering
+  },
+  scrollBody: {
+    padding: 20,
+    paddingBottom: 40
+  },
   noMargin: { margin: 0 },
 });
 
