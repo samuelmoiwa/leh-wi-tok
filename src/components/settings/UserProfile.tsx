@@ -1,68 +1,79 @@
-// src/components/UserProfile.tsx
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState, useCallback } from "react"; // Added hooks
 import { StyleSheet, View } from "react-native";
 import { Avatar, Button, Surface, Text } from "react-native-paper";
+import { useFocusEffect } from "@react-navigation/native"; // Added for auto-refresh
 import { useAppTheme } from "../../context/ThemeContext";
+import { getProfile } from "../../utils/db"; // Ensure this is exported from your db utils
 
 const UserProfile = () => {
   const router = useRouter();
   const { isDarkMode } = useAppTheme();
 
-  const bgColor = isDarkMode ? "#1E1E1E" : "#FFFFFF";
-  const textColor = isDarkMode ? "#F9FAFB" : "#111827";
-  const subTextColor = isDarkMode ? "#9CA3AF" : "#6B7280";
-  const decColor = isDarkMode ? "rgba(192, 38, 111, 0.15)" : "#FCE7F3";
+  // 1. Create state to hold the profile data
+  const [profile, setProfile] = useState({
+    fullName: "Abdulai Samuel",
+    email: "samuel.abdulai@example.com",
+    role: "Student",
+    avatarUri: null as string | null,
+  });
+
+  // 2. Use focus effect to re-load data from DB when returning to this screen
+  useFocusEffect(
+    useCallback(() => {
+      const saved = getProfile() as any;
+      if (saved) {
+        setProfile({
+          fullName: saved.fullName || "Abdulai Samuel",
+          email: saved.email || "samuel.abdulai@example.com",
+          role: saved.role || "Student",
+          avatarUri: saved.avatarUri || null,
+        });
+      }
+    }, [])
+  );
+
+  const theme = {
+    bg: isDarkMode ? "#1E1E1E" : "#FFFFFF",
+    text: isDarkMode ? "#F9FAFB" : "#111827",
+    sub: isDarkMode ? "#9CA3AF" : "#6B7280",
+    dec: isDarkMode ? "rgba(192, 38, 111, 0.15)" : "#FCE7F3"
+  };
 
   return (
-    <Surface
-      style={[styles.container, { backgroundColor: bgColor }]}
-      elevation={2}
-    >
-      <View style={[styles.bgDecoration, { backgroundColor: decColor }]} />
+    <Surface style={[styles.container, { backgroundColor: theme.bg }]} elevation={2}>
+      <View style={[styles.bgDecoration, { backgroundColor: theme.dec }]} />
 
       <View style={styles.content}>
         <View style={styles.avatarContainer}>
+          {/* 3. Render the dynamic avatar */}
           <Avatar.Image
             size={100}
-            source={require("../../../assets/images/user-avatar.jpg")}
+            source={
+              profile.avatarUri
+                ? { uri: profile.avatarUri }
+                : require("../../../assets/images/user-avatar.jpg")
+            }
           />
-          <View
-            style={[
-              styles.avatarRing,
-              { borderColor: "#C0266F", opacity: isDarkMode ? 0.4 : 0.2 },
-            ]}
-          />
+          <View style={[styles.avatarRing, { borderColor: "#C0266F", opacity: isDarkMode ? 0.4 : 0.2 }]} />
         </View>
 
         <View style={styles.infoSection}>
-          <Text style={[styles.name, { color: textColor }]}>
-            Abdulai Samuel
+          {/* 4. Render the dynamic name and email */}
+          <Text style={[styles.name, { color: theme.text }]}>
+            {profile.fullName}
           </Text>
-          <Text style={[styles.email, { color: subTextColor }]}>
-            samuel.abdulai@example.com
+          <Text style={[styles.email, { color: theme.sub }]}>
+            {profile.email}
           </Text>
 
           <View style={styles.badgeContainer}>
-            <View
-              style={[
-                styles.roleBadge,
-                { backgroundColor: isDarkMode ? "#064E3B" : "#ECFDF5" },
-              ]}
-            >
-              <Text
-                style={[
-                  styles.roleText,
-                  { color: isDarkMode ? "#34D399" : "#059669" },
-                ]}
-              >
-                Student
+            <View style={[styles.roleBadge, { backgroundColor: isDarkMode ? "#064E3B" : "#ECFDF5" }]}>
+              <Text style={[styles.roleText, { color: isDarkMode ? "#34D399" : "#059669" }]}>
+                {profile.role}
               </Text>
             </View>
-            <Text style={[styles.locationText, { color: subTextColor }]}>
-              {" "}
-              • Sierra Leone
-            </Text>
+            <Text style={[styles.locationText, { color: theme.sub }]}> • Sierra Leone</Text>
           </View>
         </View>
 
